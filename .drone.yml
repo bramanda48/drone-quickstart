@@ -14,7 +14,7 @@ steps:
   image: busybox
   commands:
   - echo "thank you";
-  - echo "${NODE_ENV}";
+  - echo "$NODE_ENV";
  
 trigger:
   branch:
