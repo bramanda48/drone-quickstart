@@ -3,12 +3,6 @@ kind: pipeline
 type: docker
 name: default
 
-environment:
-  DOCKER_REGISTRY_USERNAME:
-    from_secret: DOCKER_REGISTRY_USERNAME
-  DOCKER_REGISTRY_PASSWORD:
-    from_secret: DOCKER_REGISTRY_PASSWORD
-
 steps:
 - name: hello1
   image: busybox
@@ -22,6 +16,11 @@ steps:
   - echo "DOCKER_REGISTRY_PASSWORD=${DOCKER_REGISTRY_PASSWORD}"
   - echo "DOCKER_REGISTRY_USERNAME=$DOCKER_REGISTRY_USERNAME";
   - echo "DOCKER_REGISTRY_PASSWORD=$DOCKER_REGISTRY_PASSWORD";
+  environment:
+    DOCKER_REGISTRY_USERNAME:
+      from_secret: DOCKER_REGISTRY_USERNAME
+    DOCKER_REGISTRY_PASSWORD:
+      from_secret: DOCKER_REGISTRY_PASSWORD
   
 - name: hello2
   image: busybox
@@ -32,6 +31,11 @@ steps:
   - cat example.txt
   - echo "DOCKER_REGISTRY_USERNAME=$(DOCKER_REGISTRY_USERNAME)";
   - echo "DOCKER_REGISTRY_PASSWORD=$(DOCKER_REGISTRY_PASSWORD)";
+  environment:
+    DOCKER_REGISTRY_USERNAME:
+      from_secret: DOCKER_REGISTRY_USERNAME
+    DOCKER_REGISTRY_PASSWORD:
+      from_secret: DOCKER_REGISTRY_PASSWORD
  
 trigger:
   branch:
