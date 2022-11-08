@@ -10,12 +10,16 @@ steps:
   - echo "hello world";
   - export NODE_ENV=testing;
   - echo "$NODE_ENV";
+  - echo "This is example file" >> example.txt
+  - ls -al
   
 - name: hello2
   image: busybox
   commands:
   - echo "thank you";
   - echo "$NODE_ENV";
+  - ls -al
+  - cat example.txt
  
 trigger:
   branch:
