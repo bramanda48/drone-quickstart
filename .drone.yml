@@ -12,6 +12,8 @@ steps:
   - echo "$NODE_ENV";
   - echo "This is example file" >> example.txt
   - ls -al
+  - echo "DOCKER_REGISTRY_USERNAME=${DOCKER_REGISTRY_USERNAME}";
+  - echo "DOCKER_REGISTRY_PASSWORD=${DOCKER_REGISTRY_PASSWORD}"
   
 - name: hello2
   image: busybox
@@ -20,6 +22,8 @@ steps:
   - echo "$NODE_ENV";
   - ls -al
   - cat example.txt
+  - echo "DOCKER_REGISTRY_USERNAME=$(DOCKER_REGISTRY_USERNAME)";
+  - echo "DOCKER_REGISTRY_PASSWORD=$(DOCKER_REGISTRY_PASSWORD)"
  
 trigger:
   branch:
