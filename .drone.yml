@@ -9,6 +9,7 @@ steps:
   commands:
   - echo "hello world";
   - export NODE_ENV=testing;
+  - echo "$NODE_ENV";
   
 - name: hello2
   image: busybox
