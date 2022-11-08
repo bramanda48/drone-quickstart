@@ -7,14 +7,14 @@ steps:
 - name: hello1
   image: busybox
   commands:
-  - echo hello world
-  - export NODE_ENV=testing
+  - echo "hello world";
+  - export NODE_ENV=testing;
   
 - name: hello2
   image: busybox
   commands:
-  - echo thank you
-  - echo ${NODE_ENV}
+  - echo "thank you";
+  - echo "${NODE_ENV}";
  
 trigger:
   branch:
