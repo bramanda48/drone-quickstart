@@ -49,7 +49,3 @@ steps:
       - push
     branch:
       - hello-drone-quickstart
-      
-trigger:
-  branch:
-  - main
