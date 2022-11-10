@@ -23,7 +23,7 @@ steps:
       from_secret: DOCKER_REGISTRY_USERNAME
     DOCKER_REGISTRY_PASSWORD:
       from_secret: DOCKER_REGISTRY_PASSWORD
-  
+      
 - name: hello2
   image: busybox
   commands:
@@ -38,7 +38,16 @@ steps:
       from_secret: DOCKER_REGISTRY_USERNAME
     DOCKER_REGISTRY_PASSWORD:
       from_secret: DOCKER_REGISTRY_PASSWORD
- 
+      
+- name: hello3
+  image: busybox
+  commands:
+  - echo "youre welcome";
+  - echo "$DRONE_DEPLOY_TO";
+  when:
+    event:
+      - promote  
+      
 trigger:
   branch:
   - main
