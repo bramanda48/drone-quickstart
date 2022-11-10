@@ -3,17 +3,53 @@ kind: pipeline
 type: docker
 name: default
 
-# remove this section if your CPU is amd64
-platform:
-  os: linux
-  arch: arm64
-
 steps:
-- name: hello
+- name: hello1
   image: busybox
   commands:
-  - echo hello world
- 
+  - echo "hello world";
+  - export NODE_ENV=testing;
+  - echo "$NODE_ENV";
+  - echo "This is example file" >> example.txt
+  - ls -al
+  - echo "DOCKER_REGISTRY_USERNAME=${DOCKER_REGISTRY_USERNAME}";
+  - echo "DOCKER_REGISTRY_PASSWORD=${DOCKER_REGISTRY_PASSWORD}"
+  - echo "DOCKER_REGISTRY_USERNAME=$DOCKER_REGISTRY_USERNAME";
+  - echo "DOCKER_REGISTRY_PASSWORD=$DOCKER_REGISTRY_PASSWORD";
+  - export IMAGE_TAG="$([[ ! -z "$DRONE_BUILD_PARENT" && "$DRONE_BUILD_PARENT" -gt 0 ]] && echo "$DRONE_SOURCE_BRANCH-build.$DRONE_BUILD_PARENT" || echo "$DRONE_SOURCE_BRANCH")";
+  - echo $IMAGE_TAG;
+  environment:
+    DOCKER_REGISTRY_USERNAME:
+      from_secret: DOCKER_REGISTRY_USERNAME
+    DOCKER_REGISTRY_PASSWORD:
+      from_secret: DOCKER_REGISTRY_PASSWORD
+      
+- name: hello2
+  image: busybox
+  commands:
+  - echo "thank you";
+  - echo "$NODE_ENV";
+  - ls -al
+  - cat example.txt
+  - echo "DOCKER_REGISTRY_USERNAME=$(DOCKER_REGISTRY_USERNAME)";
+  - echo "DOCKER_REGISTRY_PASSWORD=$(DOCKER_REGISTRY_PASSWORD)";
+  environment:
+    DOCKER_REGISTRY_USERNAME:
+      from_secret: DOCKER_REGISTRY_USERNAME
+    DOCKER_REGISTRY_PASSWORD:
+      from_secret: DOCKER_REGISTRY_PASSWORD
+      
+- name: hello3
+  image: busybox
+  commands:
+  - echo "youre welcome";
+  - echo "$DRONE_DEPLOY_TO";
+  when:
+    event:
+      - push
+    branch:
+      - hello-drone-quickstart
+      
 trigger:
   branch:
   - main
