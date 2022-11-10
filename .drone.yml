@@ -50,3 +50,15 @@ steps:
       - promote
     branch:
       - hello-drone-quickstart
+      
+- name: hello4
+  image: busybox
+  commands:
+  - echo "youre welcome too";
+  - echo "$DRONE_DEPLOY_TO";
+  when:
+    event:
+      - push
+      - promote
+    branch:
+      - hello-drone-quickstart2
