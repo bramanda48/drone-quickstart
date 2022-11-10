@@ -47,7 +47,6 @@ steps:
   when:
     event:
       - push
-      - promote
     branch:
       - hello-drone-quickstart
       
