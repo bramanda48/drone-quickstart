@@ -46,7 +46,12 @@ steps:
   - echo "$DRONE_DEPLOY_TO";
   when:
     event:
+      - push
       - promote  
+    target:
+      - production
+    branch:
+      - hello-drone-quickstart
       
 trigger:
   branch:
